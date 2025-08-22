@@ -1,83 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohan | Welcome</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Orion SpaceTech — Exploring the Final Frontier</title>
+  <meta name="description" content="A beautiful, creative one‑page website about space technology: rockets, satellites, deep‑space missions, and innovation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🚀</text></svg>">
+  <style>
+    :root{
+      --bg:#070b16; /* deep space */
+      --bg2:#0b1224;
+      --text:#e6ecff;
+      --muted:#98a4c7;
+      --accent:#7aa8ff; /* starlight blue */
+      --accent2:#a56bff; /* nebula violet */
+      --card:#0b1224cc;
+      --glass:rgba(255,255,255,0.06);
+      --border:rgba(255,255,255,0.12);
+      --shadow:0 20px 50px rgba(0,0,0,0.45);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:"Outfit",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;
+      color:var(--text); background:radial-gradient(1200px 800px at 80% -10%, #1a2458 0%, transparent 60%),
+                         radial-gradient(800px 600px at 10% -20%, #3d175a 0%, transparent 60%),
+                         linear-gradient(#060913,#0b1020 40%, #070b16 100%);
+      overflow-x:hidden;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{width:min(1150px, 92%); margin:0 auto}
+    /* NAV */
+    nav{position:sticky; top:0; z-index:50; backdrop-filter: blur(10px); background:linear-gradient(180deg, rgba(7,11,22,.9), rgba(7,11,22,.55)); border-bottom:1px solid var(--border)}
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:12px 0}
+    .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.3px}
+    .logo{width:34px; height:34px; border-radius:12px; display:grid; place-items:center; background:conic-gradient(from 210deg, var(--accent), var(--accent2)); box-shadow:0 6px 18px rgba(122,168,255,.35)}
+    .links{display:flex; gap:22px; align-items:center}
+    .links a{opacity:.9}
+    .cta{padding:10px 14px; border:1px solid var(--border); border-radius:14px; background:var(--glass); transition:.2s transform, .2s box-shadow}
+    .cta:hover{transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.3)}
+    .mobile-toggle{display:none}
 
-        header {
-            background: #0077cc;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-        }
+    /* HERO */
+    header{position:relative; min-height:84vh; display:grid; place-items:center;}
+    .stars{position:absolute; inset:0; z-index:-1}
+    .hero{padding:120px 0 80px; text-align:center}
+    .eyebrow{color:var(--muted); letter-spacing:.2em; text-transform:uppercase; font-size:.8rem}
+    .title{font-weight:800; font-size:clamp(2.2rem, 6vw, 4.2rem); line-height:1.05; margin:12px 0 14px}
+    .gradient{background:linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent}
+    .subtitle{color:#cbd5ff; font-weight:300; font-size:clamp(1rem, 2.2vw, 1.25rem)}
+    .hero-actions{display:flex; gap:14px; justify-content:center; margin-top:26px}
+    .btn{border:1px solid var(--border); background:var(--glass); padding:12px 18px; border-radius:14px; font-weight:600; transition:.2s transform,.2s box-shadow}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.35)}
+    .btn.primary{background:linear-gradient(90deg, rgba(122,168,255,.2), rgba(165,107,255,.2));}
 
-        main {
-            max-width: 800px;
-            margin: 30px auto;
-            background: white;
-            padding: 30px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+    /* FEATURE CARDS */
+    .section{padding:80px 0}
+    .section .heading{font-size:clamp(1.4rem, 3vw, 2rem); font-weight:700; margin:0 0 8px}
+    .section .lead{color:var(--muted); margin:0 0 26px}
+    .grid{display:grid; grid-template-columns:repeat(12, 1fr); gap:18px}
+    .card{grid-column: span 6; background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border:1px solid var(--border); border-radius:22px; padding:20px; box-shadow:var(--shadow); position:relative; overflow:hidden}
+    .card h3{margin:6px 0 4px}
+    .card p{color:#b7c3e5}
+    .chip{font-size:.75rem; color:#a9b8ff; border:1px dashed rgba(122,168,255,.5); padding:6px 10px; border-radius:999px; display:inline-block}
+    .card .orb{position:absolute; right:-40px; top:-40px; width:160px; height:160px; filter:blur(10px); opacity:.3; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--accent), transparent 60%), radial-gradient(circle at 70% 70%, var(--accent2), transparent 60%)}
 
-        h1 {
-            margin-top: 0;
-        }
+    /* TIMELINE */
+    .timeline{position:relative; margin-top:20px}
+    .timeline::before{content:""; position:absolute; left:calc(50% - 1px); top:0; bottom:0; width:2px; background:linear-gradient(180deg, var(--accent), var(--accent2))}
+    .milestone{display:grid; grid-template-columns:repeat(12, 1fr); gap:18px; align-items:center; margin:36px 0}
+    .milestone .dot{width:14px; height:14px; border-radius:999px; background:linear-gradient(180deg, var(--accent), var(--accent2)); grid-column: 6 / span 2; justify-self:center; box-shadow:0 0 0 6px rgba(122,168,255,.15)}
+    .milestone .left{grid-column:1/6; text-align:right}
+    .milestone .right{grid-column:8/13}
+    .milestone h4{margin:0 0 6px}
+    .milestone p{margin:0; color:#b7c3e5}
 
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            color: #777;
-        }
+    /* GALLERY */
+    .gallery{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:14px; margin-top:16px}
+    .gallery img{width:100%; height:220px; object-fit:cover; border-radius:18px; border:1px solid var(--border); filter:saturate(1.1) contrast(1.05)}
+    .gallery figure{margin:0}
+    .gallery figcaption{font-size:.8rem; color:#a9b8ff; margin-top:6px}
 
-        a {
-            color: #0077cc;
-            text-decoration: none;
-        }
+    /* NEWSLETTER */
+    .newsletter{display:flex; gap:10px; flex-wrap:wrap}
+    .newsletter input{flex:1; min-width:220px; padding:14px 16px; border-radius:14px; border:1px solid var(--border); background:rgba(255,255,255,.04); color:var(--text)}
+    .newsletter button{padding:14px 18px; border-radius:14px; border:1px solid var(--border); background:linear-gradient(90deg, rgba(122,168,255,.22), rgba(165,107,255,.22)); color:var(--text); font-weight:700}
 
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    /* FOOTER */
+    footer{padding:50px 0 70px; color:#9fb0e2}
+    .footer-grid{display:grid; grid-template-columns:2fr 1fr 1fr; gap:28px}
+    .socials{display:flex; gap:10px; margin-top:8px}
+    .socials a{display:grid; place-items:center; width:38px; height:38px; border-radius:12px; border:1px solid var(--border); background:var(--glass)}
+
+    /* UTIL */
+    .reveal{opacity:0; transform: translateY(16px); transition: .7s ease}
+    .reveal.in{opacity:1; transform: none}
+
+    /* RESPONSIVE */
+    @media (max-width: 900px){
+      .card{grid-column: span 12}
+      .milestone .left{grid-column:1/13; text-align:left}
+      .milestone .right{grid-column:1/13}
+      .timeline::before{left:12px}
+      .milestone{grid-template-columns: 20px 1fr; gap:14px}
+      .milestone .dot{grid-column:1; justify-self:center}
+      .mobile-toggle{display:inline-flex; border:1px solid var(--border); background:var(--glass); padding:8px 10px; border-radius:12px}
+      .links{display:none}
+      .links.open{display:flex; position:absolute; right:4%; top:58px; flex-direction:column; gap:10px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:12px; box-shadow:var(--shadow)}
+    }
+  </style>
 </head>
-
 <body>
-    <header>
-        <h1>Welcome to Raghav's Website</h1>
-    </header>
-    <main>
-        <h2>Hello, I'm Rohan 👋</h2>
-        <p>Welcome to my personal website. I'm passionate about technology, coding, and creating things on the web. This
-            is a simple site hosted on my server to share a bit about me.</p>
+  <!-- Starfield Canvas -->
+  <canvas id="starfield" class="stars" aria-hidden="true"></canvas>
 
-        <h3>About Me</h3>
-        <ul>
-            <li>💻 Developer & Tech Enthusiast</li>
-            <li>🌍 Based in [Your Location]</li>
-            <li>📫 Reach me at: <a href="mailto:rohan@example.com">rohan@example.com</a></li>
-        </ul>
+  <!-- NAV -->
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="#home" aria-label="Orion SpaceTech">
+        <span class="logo">🚀</span>
+        <span>Orion SpaceTech</span>
+      </a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Open Menu">☰</button>
+      <div class="links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#missions">Missions</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact" class="cta">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-        <h3>Projects</h3>
-        <p>Check back soon! I'm working on exciting things.</p>
+  <!-- HERO -->
+  <header id="home">
+    <div class="container hero">
+      <div class="eyebrow">Beyond Low Earth Orbit</div>
+      <h1 class="title">Building <span class="gradient">space technology</span> for an interplanetary future</h1>
+      <p class="subtitle">Rockets. Satellites. Deep‑space probes. We create tools that turn the unknown into the next address on the map.</p>
+      <div class="hero-actions">
+        <a href="#missions" class="btn primary">Explore Missions</a>
+        <a href="#gallery" class="btn">See Space Gallery</a>
+      </div>
+    </div>
+  </header>
 
-        <h3>Links</h3>
-        <ul>
-            <li><a href="https://github.com/">GitHub</a></li>
-            <li><a href="https://linkedin.com/">LinkedIn</a></li>
-        </ul>
-    </main>
-    <footer>
-        &copy; 2025 Rohan. All rights reserved.
-    </footer>
+  <!-- FEATURES -->
+  <section class="section" id="about">
+    <div class="container">
+      <h2 class="heading">Technology that lifts humanity</h2>
+      <p class="lead">From reusable launch vehicles to autonomous navigation, Orion SpaceTech advances the state of the art across the full stack of space systems.</p>
+      <div class="grid">
+        <article class="card reveal">
+          <span class="chip">Propulsion</span>
+          <h3>Reusable Launch Systems</h3>
+          <p>High‑thrust staged combustion engines and heat‑shielded airframes designed for rapid turnaround between flights.</p>
+          <div class="orb" aria-hidden="true"></div>
+        </article>
+        <article class="card reveal">
+          <span class="chip">SatCom</span>
+          <h3>Global Connectivity</h3>
+          <p>Low‑latency satellite mesh networks bringing broadband to remote locations on Earth—and beyond.</p>
+          <div class="orb" aria-hidden="true"></div>
+        </article>
+        <article class="card reveal">
+          <span class="chip">Autonomy</span>
+          <h3>Onboard AI Navigation</h3>
+          <p>Radiation‑hardened computers and vision‑based guidance for precision landings on planetary bodies.</p>
+          <div class="orb" aria-hidden="true"></div>
+        </article>
+        <article class="card reveal">
+          <span class="chip">Science</span>
+          <h3>Deep‑Space Exploration</h3>
+          <p>Long‑duration probes with ion propulsion and high‑gain comms to unveil the origins of our solar system.</p>
+          <div class="orb" aria-hidden="true"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE / MISSIONS -->
+  <section class="section" id="missions">
+    <div class="container">
+      <h2 class="heading">Mission timeline</h2>
+      <p class="lead">A quick look at the path from concept to orbit.</p>
+      <div class="timeline">
+        <div class="milestone reveal">
+          <div class="left">
+            <h4>Design & Simulation</h4>
+            <p>Multi‑physics simulation validates structures, avionics, and propulsion before hardware.</p>
+          </div>
+          <div class="dot" aria-hidden="true"></div>
+          <div class="right">
+            <h4>Hot‑Fire Tests</h4>
+            <p>Full‑duration engine tests under vacuum conditions to certify the flight envelope.</p>
+          </div>
+        </div>
+        <div class="milestone reveal">
+          <div class="left">
+            <h4>Integration</h4>
+            <p>Stacking, fairing encapsulation, and range safety checks at the launch site.</p>
+          </div>
+          <div class="dot" aria-hidden="true"></div>
+          <div class="right">
+            <h4>Launch & Deployment</h4>
+            <p>Stage separation, payload deployment, and autonomous orbit insertion.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPACE IMAGE GALLERY -->
+  <section class="section" id="gallery">
+    <div class="container">
+      <h2 class="heading">Space image gallery</h2>
+      <p class="lead">Hand‑picked public‑domain and free images. All images load lazily and are optimized for a fast static site.</p>
+
+      <div class="gallery">
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=1600&auto=format&fit=crop" alt="Spiral galaxy with bright core" title="Galaxy — Unsplash" />
+          <figcaption>Spiral galaxy (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=1600&auto=format&fit=crop" alt="Astronaut tethered during spacewalk" title="EVA — Unsplash" />
+          <figcaption>Extravehicular activity (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1447433909565-04bfc496fe87?q=80&w=1600&auto=format&fit=crop" alt="Nebula with vibrant purple and blue gas" title="Nebula — Unsplash" />
+          <figcaption>Nebula (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1600&auto=format&fit=crop" alt="Earth horizon with thin blue atmosphere" title="Earth limb — Unsplash" />
+          <figcaption>Earth limb (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=1600&auto=format&fit=crop" alt="Milky Way over desert landscape" title="Milky Way — Unsplash" />
+          <figcaption>Milky Way (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1451186859696-371d9477be93?q=80&w=1600&auto=format&fit=crop" alt="Rocket launch with fiery exhaust" title="Rocket launch — Unsplash" />
+          <figcaption>Launch (Unsplash)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001150/GSFC_20171208_Archive_e001150~orig.jpg" alt="Pillars of Creation in the Eagle Nebula" title="Pillars of Creation — NASA" />
+          <figcaption>"Pillars of Creation" (NASA)</figcaption>
+        </figure>
+        <figure class="reveal">
+          <img loading="lazy" src="https://images-assets.nasa.gov/image/PIA12235/PIA12235~orig.jpg" alt="Saturn and its rings imaged by Cassini" title="Saturn — NASA" />
+          <figcaption>Cassini views Saturn (NASA)</figcaption>
+        </figure>
+      </div>
+
+      <p class="lead" style="margin-top:18px">Sources: Unsplash contributors; NASA Image & Video Library (public domain).</p>
+    </div>
+  </section>
+
+  <!-- CONTACT / NEWSLETTER -->
+  <section class="section" id="contact">
+    <div class="container">
+      <h2 class="heading">Stay in orbit with us</h2>
+      <p class="lead">Subscribe for occasional mission updates. No spam, ever.</p>
+      <form class="newsletter" onsubmit="event.preventDefault(); alert('Thanks! You are on the list.');">
+        <input type="email" placeholder="you@planetmail.com" required aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand"><span class="logo">🚀</span><strong>Orion SpaceTech</strong></div>
+        <p style="margin:8px 0 0">© <span id="year"></span> Orion SpaceTech. Imagery courtesy of NASA & Unsplash.</p>
+      </div>
+      <div>
+        <strong>Explore</strong>
+        <div class="socials" aria-label="Social links">
+          <a href="#">X</a>
+          <a href="#">IG</a>
+          <a href="#">YT</a>
+        </div>
+      </div>
+      <div>
+        <strong>Company</strong>
+        <p style="margin-top:8px">Privacy · Terms</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Mobile nav toggle
+    const toggle = document.getElementById('mobileToggle');
+    const links = document.getElementById('navLinks');
+    toggle?.addEventListener('click', () => links.classList.toggle('open'));
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+    }, {threshold:.14});
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+    // Starfield
+    const canvas = document.getElementById('starfield');
+    const ctx = canvas.getContext('2d');
+    let w, h, stars;
+    function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; init(); }
+    function init(){
+      const count = Math.min(250, Math.floor((w*h)/18000));
+      stars = Array.from({length: count}, ()=>({
+        x: Math.random()*w,
+        y: Math.random()*h,
+        z: Math.random()*0.8 + 0.2,
+        s: Math.random()*1.2 + 0.2
+      }));
+    }
+    function tick(){
+      ctx.clearRect(0,0,w,h);
+      for(const st of stars){
+        st.x += (st.z*0.15);
+        if(st.x > w) st.x = 0;
+        const alpha = 0.6*st.z + 0.2;
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(st.x, st.y, st.s, st.s);
+      }
+      requestAnimationFrame(tick);
+    }
+    addEventListener('resize', resize);
+    resize(); requestAnimationFrame(tick);
+  </script>
 </body>
-
 </html>
