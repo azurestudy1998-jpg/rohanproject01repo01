@@ -336,5 +336,28 @@
     addEventListener('resize', resize);
     resize(); requestAnimationFrame(tick);
   </script>
+  <h2>Fetch Data from Azure App</h2>
+
+  <!-- Button -->
+  <button onclick="fetchData()">Get Data</button>
+
+  <!-- Paragraph to display response -->
+  <p id="response"></p>
+
+  <script>
+    async function fetchData() {
+      const url = "https://rohanprojet007-f7fnc0b9aeebdvgm.canadacentral-01.azurewebsites.net/";
+      try {
+        const res = await fetch(url);
+        if (!res.ok) {
+          throw new Error(`Error: ${res.status} ${res.statusText}`);
+        }
+        const data = await res.text();  // use .json() if your API returns JSON
+        document.getElementById("response").innerText = data;
+      } catch (err) {
+        document.getElementById("response").innerText = err.message;
+      }
+    }
+  </script>
 </body>
 </html>
